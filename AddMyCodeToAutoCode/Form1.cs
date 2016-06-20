@@ -291,6 +291,11 @@ namespace AddMyCodeToAutoCode
                     Regex re2 = new Regex("(?<=(" + this._start2 + "))[.\\s\\S]*?(?=(" + this._end2 + "))", RegexOptions.Multiline | RegexOptions.Singleline);
                     if (renew.IsMatch(sSource))
                     {
+                        using (StreamReader sr = new StreamReader(autoFile, Encoding.Default))
+                        {
+                            modifyString = StringTool.GetValue(sr.ReadToEnd(), _newstart, _newend);
+                            sr.Close();
+                        }
                         sSource = renew.Replace(sSource, modifyString);
                     }
 
